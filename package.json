@@ -1,0 +1,19 @@
+{
+  "name": "demo_three-particle-m-trust",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:MorookaKotaro/demo_three-particle-m-trust.git",
+  "author": "MorookaKotaro <morookakotaro@team-lab.com>",
+  "license": "MIT",
+  "source": "src/index.html",
+  "scripts": {
+    "dev": "parcel"
+  },
+  "devDependencies": {
+    "@types/three": "^0.133.1",
+    "parcel": "^2.0.0"
+  },
+  "dependencies": {
+    "three": "^0.133.1"
+  }
+}
