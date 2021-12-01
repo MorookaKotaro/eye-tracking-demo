@@ -10,10 +10,18 @@
     "dev": "parcel"
   },
   "devDependencies": {
+    "@parcel/optimizer-data-url": "^2.0.1",
+    "@parcel/transformer-inline-string": "^2.0.0",
     "@types/three": "^0.133.1",
-    "parcel": "^2.0.0"
+    "parcel": "^2.0.0",
+    "parcel-plugin-static-files-copy": "^2.6.0"
   },
   "dependencies": {
     "three": "^0.133.1"
+  },
+  "staticFiles": {
+    "staticPath": [
+      "/static/cactus.gltf"
+    ]
   }
 }

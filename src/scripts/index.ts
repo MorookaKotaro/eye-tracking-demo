@@ -1,4 +1,7 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import jjj from 'url:/static/model2.glb';
 
 let camera, scene, renderer;
 let geometry, material, mesh;
@@ -7,45 +10,60 @@ export default class Sketch {
   renderer: THREE.WebGLRenderer;
   camera: THREE.Camera;
   scene: THREE.Scene;
+  light: THREE.AmbientLight;
   time: number;
   geometry: THREE.PlaneGeometry;
   material: THREE.MeshNormalMaterial;
   mesh: THREE.Mesh<typeof geometry, typeof material>;
+  controls: OrbitControls;
 
   constructor() {
-    this.renderer = new THREE.WebGLRenderer( { antialias: true } );
-    this.renderer.setSize( window.innerWidth, window.innerHeight );
-    document.getElementById('container').appendChild( this.renderer.domElement );
+    const canvas = document.getElementsByTagName('canvas')[0]
 
-    this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
-    this.camera.position.z = 1;
-  
+    this.renderer = new THREE.WebGLRenderer( { antialias: true, canvas: canvas } );
+    this.renderer.setSize( window.innerWidth, window.innerHeight );
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
     this.scene = new THREE.Scene();
 
-    this.addMesh();
+    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
+    this.camera.position.x = 1
+    this.camera.position.y = 1
+    this.camera.position.z = 2
+    this.scene.add(this.camera)
 
-    this.time = 0;
+    this.controls = new OrbitControls(this.camera, canvas)
+    this.controls.enableDamping = true
+  
+
+    this.light = new THREE.AmbientLight(0x404040);
+    this.scene.add(this.light);
+
+    const loader = new GLTFLoader();
+
+    loader.load(jjj, (gltf) => {
+      this.scene.add(gltf.scene);
+    })
 
     this.render();
   }
 
-  addMesh() {
-    this.geometry = new THREE.PlaneBufferGeometry( 1, 1 );
-    this.material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
-
-    this.mesh = new THREE.Mesh( this.geometry, this.material );
-    this.scene.add( this.mesh );
-  }
-
   render() {
-    this.time++;
-    this. mesh.rotation.x = this.time / 200;
-    this. mesh.rotation.y = this.time / 100;
-    console.log(this.time);
     this.renderer.render( this.scene, this.camera );
+    this.controls.update()
     window.requestAnimationFrame(this.render.bind(this));
   }
 }
 
 new Sketch();
+
+// @ts-expect-error
+if (module.hot) {
+  // @ts-expect-error
+  module.hot.dispose(() => {
+    window.location.reload();
+  });
+  // @ts-expect-error
+  module.hot.accept();
+}
  

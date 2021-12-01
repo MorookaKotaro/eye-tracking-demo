@@ -3,6 +3,7 @@
   "transformers": {
     "*.{js}": [
       "@parcel/transformer-js"
-    ]
+    ],
+    "url:*": ["@parcel/transformer-raw"]
   }
 }
