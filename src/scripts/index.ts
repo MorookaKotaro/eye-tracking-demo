@@ -1,7 +1,10 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import jjj from 'url:/static/model2.glb';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
+import objModel from 'url:/static/plant.obj';
+import mtl from 'url:/static/plant.mtl';
 
 let camera, scene, renderer;
 let geometry, material, mesh;
@@ -39,10 +42,26 @@ export default class Sketch {
     this.light = new THREE.AmbientLight(0x404040);
     this.scene.add(this.light);
 
-    const loader = new GLTFLoader();
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7)
+    directionalLight.position.set(2, 2, - 1)
 
-    loader.load(jjj, (gltf) => {
-      this.scene.add(gltf.scene);
+    this.scene.add(directionalLight)
+    
+    const mtlLoader = new MTLLoader();
+
+    mtlLoader.load(mtl, (material) => {
+      material.preload();
+
+      const loader = new OBJLoader();
+
+      // loader.setMaterials(material);
+
+      loader.load(objModel, (model) => {
+        model.position.set(0, 0, 0)
+        model.scale.set(0.002, 0.002, 0.002)
+        this.scene.add(model);
+      })
+
     })
 
     this.render();
