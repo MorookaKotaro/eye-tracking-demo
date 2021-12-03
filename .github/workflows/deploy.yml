@@ -2,9 +2,7 @@ name: deploy
 
 on:
   push:
-    branches: [pages]
-    paths:
-      - "*"
+    branches: [main]
 
 jobs:
   gh-release:
