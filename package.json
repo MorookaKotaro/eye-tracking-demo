@@ -1,13 +1,13 @@
 {
   "name": "demo_three-particle-m-trust",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:MorookaKotaro/demo_three-particle-m-trust.git",
   "author": "MorookaKotaro <morookakotaro@team-lab.com>",
   "license": "MIT",
   "source": "src/index.html",
   "scripts": {
-    "dev": "parcel"
+    "dev": "parcel",
+    "build": "parcel build"
   },
   "devDependencies": {
     "@parcel/optimizer-data-url": "^2.0.1",
