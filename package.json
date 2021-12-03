@@ -17,6 +17,7 @@
     "parcel-plugin-static-files-copy": "^2.6.0"
   },
   "dependencies": {
+    "ml5": "^0.7.1",
     "three": "^0.133.1"
   },
   "staticFiles": {
