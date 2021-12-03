@@ -15,7 +15,8 @@
     "@parcel/transformer-inline-string": "^2.0.0",
     "@types/three": "^0.133.1",
     "parcel": "^2.0.0",
-    "parcel-plugin-static-files-copy": "^2.6.0"
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "push-dir": "^0.4.1"
   },
   "dependencies": {
     "ml5": "^0.7.1",
@@ -26,4 +27,4 @@
       "/static/cactus.gltf"
     ]
   }
-} 
+}
